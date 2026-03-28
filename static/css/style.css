@@ -1364,3 +1364,87 @@ body {
     border-radius: 12px;
   }
 }
+
+/* ==========================================================================
+   Advertisement Sections
+   ========================================================================== */
+.ad-sidebar {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 160px;
+    min-height: 600px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 15px 5px;
+    z-index: 5;
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-card);
+    transition: opacity 0.3s ease;
+}
+
+.ad-left {
+    left: 20px;
+}
+
+.ad-right {
+    right: 20px;
+}
+
+.ad-label {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    opacity: 0.5;
+}
+
+.ad-in-page {
+    margin-top: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 20px;
+    display: none; /* Desktop hidden by default, shown on mobile */
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Responsive Ads Logic */
+/* Desktop Sidebars: Only show when window is wide enough for both (900px app + 160px*2 ads + margins) */
+@media (min-width: 1351px) {
+    .ad-sidebar {
+        display: flex !important;
+    }
+    .ad-in-page {
+        display: none !important;
+    }
+}
+
+/* Fallback: If screen is 1350px or narrower, hide sidebars and show the in-page ad */
+@media (max-width: 1350px) {
+    .ad-sidebar {
+        display: none !important;
+    }
+    .ad-in-page {
+        display: block !important;
+    }
+}
+
+/* Tablet & Mobile Specifics */
+@media (max-width: 500px) {
+    .ad-in-page {
+        padding: 10px;
+        margin-top: 1.5rem;
+        border-radius: 12px;
+    }
+}
