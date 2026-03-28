@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="theme-color" content="#050508">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/favicon.png') }}">
+    <title>Video Downloader</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Phosphor Icons for UI Elements -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body>
+    <!-- Initial Load Overlay -->
+    <div id="initial-overlay" class="startup-overlay">
+        <div class="loader-container">
+            <div class="glow-ring"></div>
+            <div class="core-dot"></div>
+        </div>
+    </div>
+
+    <!-- Background Elements -->
+    <div class="bg-layer">
+        <div class="ambient-orb orb-1"></div>
+        <div class="ambient-orb orb-2"></div>
+        <div class="ambient-orb orb-3"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <!-- Main Application Container -->
+    <div class="app-container" id="main-app">
+
+        <header class="hero">
+            <h1 class="glitch" data-text="video downloader">Video downloader</h1>
+            <p class="subtitle">Next-Gen Video Downloader</p>
+        </header>
+
+        <main class="glass-panel main-panel">
+            <div class="input-group">
+                <i class="ph ph-link input-icon"></i>
+                <input type="text" id="video-url" placeholder="Paste YouTube, TikTok, or Instagram link..."
+                    autocomplete="off">
+                <button id="clear-btn" class="icon-btn tooltip" aria-label="Clear"><i class="ph ph-x"></i></button>
+                <button id="extract-btn" class="primary-btn">
+                    <span>Extract</span>
+                    <i class="ph ph-lightning"></i>
+                </button>
+            </div>
+
+            <div id="error-message" class="error-msg hidden">
+                <i class="ph ph-warning-circle"></i> <span id="error-text">Invalid URL provided</span>
+            </div>
+
+            <!-- Loading Spinner (Extraction Phase) -->
+            <div id="extraction-loader" class="extract-loader hidden">
+                <div class="spinner"></div>
+                <p>Decrypting neural link...</p>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results-container" class="results-layout hidden">
+                <div class="media-preview">
+                    <img id="thumb-img" src="" alt="Video Thumbnail">
+                </div>
+
+                <div class="media-info">
+                    <h2 id="video-title">Video Title Goes Here</h2>
+
+                    <div class="action-bar">
+                        <p class="section-label">Available Formats</p>
+                        <button id="copy-link-btn" class="secondary-btn"><i class="ph ph-copy"></i> Copy Link</button>
+                    </div>
+
+                    <div class="format-selection-area" id="format-list">
+                        <div class="custom-select-wrapper">
+                            <select id="format-dropdown" class="luxury-select">
+                                <option value="">Loading formats...</option>
+                            </select>
+                            <i class="ph ph-caret-down select-icon"></i>
+                        </div>
+                        <a id="master-download-btn" href="#" class="primary-btn download-action-btn disabled-btn">
+                            <i class="ph ph-download-simple"></i> Download Selected
+                        </a>
+                    </div>
+
+                    <!-- Premium Promo Card -->
+                    <div class="premium-card">
+                        <div class="premium-content">
+                            <i class="ph ph-crown premium-icon"></i>
+                            <div class="premium-text">
+                                <h3>HD (1080p/4K) restricted to Desktop</h3>
+                                <p>Unlock full resolution, faster downloads, and no limits.</p>
+                            </div>
+                        </div>
+                        <a href="#" class="premium-btn">
+                            Download Desktop App
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Social Proof & Stats Section -->
+        <section class="social-proof-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3 class="stat-num glow-blue">99.8%</h3>
+                    <p class="stat-text">Extraction Success Rate</p>
+                </div>
+                <div class="stat-card">
+                    <h3 class="stat-num glow-purple">1M+</h3>
+                    <p class="stat-text">Videos Downloaded</p>
+                </div>
+            </div>
+
+            <div class="client-testimonial">
+                <i class="ph ph-quotes client-quote-icon glow-cyan"></i>
+                <p class="quote-text">"The fastest and most beautifully designed downloader out there. It grabs exactly
+                    the formats I need without the ads or weird popups."</p>
+                <div class="client-info">
+                    <p class="client-name">— Sarah J., Digital Creator</p>
+                </div>
+            </div>
+        </section>
+        </section>
+
+        <!-- Premium Desktop Experience Section -->
+        <section class="desktop-app-promo glass-panel">
+            <div class="promo-flex">
+                <div class="promo-text">
+                    <div class="badge neon-purple">Premium Experience</div>
+                    <h2 class="promo-title">Unlock the Ultimate <span class="glow-text">Desktop Power</span></h2>
+                    <p class="promo-description">
+                        Take your downloading to the next level with our standalone desktop application. 
+                        Enjoy restricted-quality unlocks, lightning-fast batch processing, and a seamless native experience.
+                    </p>
+                    <ul class="promo-features">
+                        <li><i class="ph ph-check-circle neon-blue"></i> 4K & 8K Ultra-HD Resolution</li>
+                        <li><i class="ph ph-check-circle neon-blue"></i> Batch Multi-Threaded Downloads</li>
+                        <li><i class="ph ph-check-circle neon-blue"></i> Lifetime Free Updates & Security</li>
+                    </ul>
+                    <div class="promo-actions">
+                        <a href="#" class="primary-btn desktop-btn">
+                            <i class="ph ph-windows-logo"></i>
+                            Download for Windows
+                        </a>
+                        <span class="version-tag">Version 2.4.0 (Latest Release)</span>
+                    </div>
+                </div>
+                <div class="promo-visual">
+                    <div class="app-mockup-container">
+                        <img src="{{ url_for('static', filename='images/app_preview.png') }}" alt="Desktop App Preview" class="app-mockup">
+                        <div class="mockup-glow"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Why Choose Our Video Downloader Section -->
+        <section class="why-choose-section">
+            <h2 class="section-title centered-title">Why Choose Our Video Downloader</h2>
+            <div class="features-grid">
+                <div class="feature-card glass-panel">
+                    <div class="feature-icon-wrapper">
+                        <i class="ph ph-cpu neon-purple"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>AI-Powered Service</h3>
+                        <p>Our advanced algorithms optimize every request to ensure the highest success rate and best possible quality for your downloads.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card glass-panel">
+                    <div class="feature-icon-wrapper">
+                        <i class="ph ph-cursor-click neon-blue"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Easy Video Download</h3>
+                        <p>A simple, 2-step process. Just paste your link and click extract. No technical knowledge or complex configuration required.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card glass-panel">
+                    <div class="feature-icon-wrapper">
+                        <i class="ph ph-rocket-launch neon-cyan"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Fast MP4 Speed</h3>
+                        <p>Experience multi-threaded downloads with lightning-fast speeds. We process your videos on high-performance servers for instant results.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card glass-panel">
+                    <div class="feature-icon-wrapper">
+                        <i class="ph ph-gift neon-pink"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Free Video Download</h3>
+                        <p>Our core services are 100% free with no hidden costs. Download your favorite content without any subscription fees or limits.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card glass-panel">
+                    <div class="feature-icon-wrapper">
+                        <i class="ph ph-shield-check neon-purple"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Safe Video Downloader</h3>
+                        <p>Security is our priority. Our system is regularly audited to ensure every download is safe, secure, and free from malware.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card glass-panel">
+                    <div class="feature-icon-wrapper">
+                        <i class="ph ph-eye-slash neon-blue"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Anonymous Download</h3>
+                        <p>Respect for privacy. We don't require any signup or personal information, and we never track your download history.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="app-footer">
+            <div class="footer-content">
+                <p>© 2026 video downloader Systems.</p>
+                <p class="footer-contact"><i class="ph ph-phone"></i> Support: <strong>+923269645280</strong></p>
+                <p class="footer-contact"><i class="ph ph-envelope-simple"></i> Email:
+                    <strong>syedmodin02@gmail.com</strong>
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
